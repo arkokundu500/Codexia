@@ -1,10 +1,18 @@
 import Redis from "ioredis"
 
-const redis = new Redis(process.env.REDIS_URL)
+const redisUrl = (process.env.REDIS_URL || "redis://localhost:6379").replace(/^http:\/\//, "redis://")
+
+const redis = new Redis(redisUrl, {
+    maxRetriesPerRequest: null,
+    enableReadyCheck: false
+})
 
 redis.on("connect", () => {
     console.log("Redis connected")
 })
 
-export default redis
+redis.on("error", (err) => {
+    console.error("Redis error:", err.message)
+})
 
+export default redis

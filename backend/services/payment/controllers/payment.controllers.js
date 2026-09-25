@@ -56,9 +56,14 @@ export const createOrder = async (req, res) => {
             status: "created"
         })
 
+        const isSandbox = process.env.CASHFREE_ENV === "SANDBOX" ||
+                          process.env.CASHFREE_ENV === "TEST" ||
+                          process.env.CASHFREE_APP_ID?.startsWith("TEST")
+
         return res.status(201).json({
             order_id: orderId,
             payment_session_id: orderData.payment_session_id,
+            mode: isSandbox ? "sandbox" : "production",
             order: {
                 id: orderId,
                 amount: selectedPlan.amount,

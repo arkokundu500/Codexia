@@ -100,7 +100,7 @@ function Plan() {
             }
 
             const cashfree = window.Cashfree({
-                mode: "production"
+                mode: data?.mode || "sandbox"
             })
 
             cashfree.checkout({

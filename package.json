@@ -1,0 +1,17 @@
+{
+  "name": "codexia",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Codexia — AI-Powered Cloud Code Editor",
+  "scripts": {
+    "redis": "docker compose -f backend/docker-compose.yaml up -d",
+    "gateway": "npm --prefix backend/gateway run dev",
+    "auth": "npm --prefix backend/services/auth run dev",
+    "project": "npm --prefix backend/services/project run dev",
+    "file": "npm --prefix backend/services/file run dev",
+    "ai": "npm --prefix backend/services/ai run dev",
+    "terminal": "npm --prefix backend/services/terminal run dev",
+    "payment": "npm --prefix backend/services/payment run dev",
+    "frontend": "npm --prefix frontend run dev"
+  }
+}
